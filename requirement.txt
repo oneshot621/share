@@ -1,0 +1,39 @@
+The Blazor project looked good. Are you working on providing a proof-of-concept for CSLA? We would need to see something that demonstrates you have a good understanding of their DataPortal. 
+Okay here is a small project we gave another individual that wanted to work on our upcoming CSLA projects to prove they could do it...
+Create a Blazor WASM called TimeKeep that allows a user to login and enter time worked for a day for a project along with uploading any receipts. There will be two roles (“Admin”, “User”). Admins can create/update/delete projects and enter date and time, update time, delete time including receipts. A user can enter/update delete time and receipts for a project that was created by the admin.
+
+
+This needs to be done using .NET 7, SQL Server, Blazor WASM, C#, and a data layer tool (DataLayerGenerator)( the following file :  dlg4.0.0.2.rar ). Just create your database first, then run this tool against it and will create some basic classes that allow you to connect and write to the database. Also this project needs to be done in Visual Studio 2022. You are free to design this in anyway you see fit but here are some basic requirements:
+Development
+
+
+Create projects named as follows CompanyName.ProjectName.Feature (ex LEI.TimeKeep.DataLayer)
+Make sure the Ignyte.TimeKeep.DataLayer.config "Copy to Output Directory" property set to "Copy Always" or the project won’t connect to the database once you create the data layer classes using the DLG tool.
+
+
+Business Layer Standards
+Implement using CSLA
+
+
+Blazor UI Standards
+
+
+All Razor pages with page routing should be placed in Page folder, with naming convention shown. (Ex. UserPage.razor)
+All code behind should be placed in a .razor.cs file.
+All css files should be places in a.razor.css file. See Blazor Style Isolation
+Data Layer Standards
+All datalayer variables should be named as follows.
+A singular object should be named db{Table name without T}Row. (Ex. var dbUserRow = new TUser()).
+A plural object should be named db{Table name without T}Table. (Ex. var dbUserTable = TUser.SelectAll()).
+Any custom code you write on the datalayer should be placed in the inheriting class not the base class. (Ex. TUser NOT TUserBase). Otherwise your code will be overwritten when you regenerate the datalayer because DLG only places generated code in the base class.
+Database Standards
+
+
+If you write a custom stored procedure prefix it with usp because the generated ones are prefixed gsp.
+If you write a unique constraint name it as follows: UQ_TableName_FieldNames. (Ex. UQ_TUser_Email)
+ALL tables should start with a capital T and should not be plural, ALWAYS singular. (Ex. TUser NOT TUsers)
+ALL views should start with a capital V.
+Each table should have a primary key named Key that defaults to "newsequentialid()" which should always be the first field in the table.
+All foreign keys should be defined right after the primary key and should be named as follows: Table name appended with Key. (Ex. TRoleKey)
+The last 4 fields of every table should be our standard auditing columns.
+dlg4.0.0.2.rar
