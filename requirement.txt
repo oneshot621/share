@@ -36,4 +36,3 @@ ALL views should start with a capital V.
 Each table should have a primary key named Key that defaults to "newsequentialid()" which should always be the first field in the table.
 All foreign keys should be defined right after the primary key and should be named as follows: Table name appended with Key. (Ex. TRoleKey)
 The last 4 fields of every table should be our standard auditing columns.
-dlg4.0.0.2.rar
